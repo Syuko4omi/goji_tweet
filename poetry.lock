@@ -73,6 +73,22 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "jaconv"
+version = "0.3.4"
+description = "Pure-Python Japanese character interconverter for Hiragana, Katakana, Hankaku, Zenkaku and more"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "janome"
+version = "0.5.0"
+description = "Japanese morphological analysis engine."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "mccabe"
 version = "0.7.0"
 description = "McCabe checker, plugin for flake8"
@@ -201,7 +217,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9.13"
-content-hash = "057d6754b8ce8ea54240933a2372e4384ad034854030b6d68dd050045621762e"
+content-hash = "d7d46438d7f61154e0fa46906539aec9dd3e1deba474f52e84a8e3b0604176c9"
 
 [metadata.files]
 black = [
@@ -247,6 +263,13 @@ flake8 = [
 iniconfig = [
     {file = "iniconfig-2.0.0-py3-none-any.whl", hash = "sha256:b6a85871a79d2e3b22d2d1b94ac2824226a63c6b741c88f7ae975f18b6778374"},
     {file = "iniconfig-2.0.0.tar.gz", hash = "sha256:2d91e135bf72d31a410b17c16da610a82cb55f6b0477d1a902134b24a455b8b3"},
+]
+jaconv = [
+    {file = "jaconv-0.3.4.tar.gz", hash = "sha256:9e7c55f3f0b0e2dbad62f6c9fa0c30fc6fffdbb78297955509d90856b3a31d6d"},
+]
+janome = [
+    {file = "Janome-0.5.0-py2.py3-none-any.whl", hash = "sha256:d098670394a77881ce2f6b7d696c0ea5ff74c0c8cf74a8a882159ec82c0e6dc7"},
+    {file = "Janome-0.5.0.tar.gz", hash = "sha256:ce4a3ed7a4635c2f80139639327d5b1e0381858ad74a3c4a61e8cc83f820400e"},
 ]
 mccabe = [
     {file = "mccabe-0.7.0-py2.py3-none-any.whl", hash = "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"},

@@ -6,6 +6,8 @@ authors = ["Syuko4omi <riorioblackcat@yahoo.co.jp>"]
 
 [tool.poetry.dependencies]
 python = "^3.9.13"
+Janome = "^0.5.0"
+jaconv = "^0.3.4"
 
 [tool.poetry.dev-dependencies]
 black = "^23.7.0"
