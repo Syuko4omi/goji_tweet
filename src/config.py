@@ -1,0 +1,1 @@
+KANJI_IDIOM_REGEX = "[一-龥]+"
