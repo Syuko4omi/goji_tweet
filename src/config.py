@@ -1,5 +1,11 @@
+import re
+from janome.tokenizer import Tokenizer
+import urllib.request
+import urllib.parse
+import ast
+
 KANJI_IDIOM_REGEX = "[一-龥]+"
-hiragana_rules_dict = {
+HIRAGANA_RULES_DICT = {
     "あ": [["い", "う", "え", "お"], ["か", "た"]],
     "い": [["あ", "う", "え", "お"], ["き", "ち"]],
     "う": [["あ", "い", "え", "お"], ["く", "つ"]],
@@ -47,3 +53,56 @@ hiragana_rules_dict = {
     "を": [["わ", "ん"], [""]],
     "ん": [["わ", "を"], ["ゆ"]],
 }
+
+
+def is_kanji_idiom(idiom: str) -> bool:
+    tokenizer = Tokenizer()
+    pos_tag_list = [
+        token.part_of_speech.split(",")[0] for token in tokenizer.tokenize(idiom)
+    ]
+    flag = False
+    if pos_tag_list == ["名詞"]:
+        if re.match(KANJI_IDIOM_REGEX, idiom) is not None:
+            if re.match(KANJI_IDIOM_REGEX, idiom).group() == idiom:
+                flag = True
+    return flag
+
+
+def suggest_homonym_list(
+    hiragana_form: str, original_kanji_form: str, exclude_original_form: bool
+) -> list[str]:
+    """
+    Given the original kanji form and furigana as inputs, this func returns homonyms
+    Input:
+        hiragana_form: furigana (e.g. さんらん)
+        original_kanji_form: the original idiom which is going to be rewritten (e.g. 散乱)
+    Output:
+        homonym_list_excluded_original_form: idiom list that has same furigana but other than original_kanji_form
+    """
+
+    url_encoded_form = urllib.parse.quote(
+        hiragana_form, "utf-8"
+    )  # we need to encode furigana, as it is used in URL
+    query_url = (
+        "http://www.google.com/transliterate?langpair=ja-Hira|ja&text={}".format(
+            url_encoded_form
+        )
+    )
+    request = urllib.request.Request(
+        query_url
+    )  # post request (https://www.google.co.jp/ime/cgiapi.html)
+
+    with urllib.request.urlopen(request) as res:
+        ret_string: str = res.readline().decode(
+            "utf-8"
+        )  # return should be one-line string
+        homonym_list = ast.literal_eval(ret_string)  # convert str to list
+        if len(homonym_list) == 1 and exclude_original_form is True:
+            homonym_list_excluded_original_form = [
+                item for item in homonym_list[0][1] if item != original_kanji_form
+            ]
+        elif len(homonym_list) == 1 and exclude_original_form is False:
+            homonym_list_excluded_original_form = [item for item in homonym_list[0][1]]
+        else:  # those don't have any homonym or separated idioms are excluded
+            homonym_list_excluded_original_form = []
+        return homonym_list_excluded_original_form
