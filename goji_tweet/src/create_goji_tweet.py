@@ -1,8 +1,8 @@
 from janome.tokenizer import Tokenizer
 import random
-from change_by_homonym import generate_goji_tweet_hom
-from change_by_one_hiragana import generate_goji_tweet_one_hira
-from config import is_kanji_idiom
+from goji_tweet.src.change_by_homonym import generate_goji_tweet_hom
+from goji_tweet.src.change_by_one_hiragana import generate_goji_tweet_one_hira
+from goji_tweet.src.config import is_kanji_idiom
 
 
 def tweet_preprocesser(original_tweet: str):
@@ -35,8 +35,3 @@ if __name__ == "__main__":
     original_tweet = "きええええぇえええ。。\n後30分でお出掛けなのに書類が散乱してるよぉおお😭😭😭"
     goji_tweet = goji_tweet_generator(original_tweet, "homonym")
     print(goji_tweet)
-    """
-    for i in range(30):
-        goji_tweet = goji_tweet_generator(original_tweet, "homonym")
-        print(goji_tweet)
-    """

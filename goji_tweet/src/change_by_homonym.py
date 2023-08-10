@@ -1,7 +1,6 @@
 import jaconv
 import random
-from config import is_kanji_idiom
-from config import suggest_homonym_list
+from goji_tweet.src.config import is_kanji_idiom, suggest_homonym_list
 
 
 def generate_goji_tweet_hom(surface, reading, noun_pos_shuffled):
