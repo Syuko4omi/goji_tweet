@@ -34,5 +34,9 @@ if __name__ == "__main__":
     tokenizer = Tokenizer()
     original_tweet = "きええええぇえええ。。\n後30分でお出掛けなのに書類が散乱してるよぉおお😭😭😭"
     goji_tweet = goji_tweet_generator(original_tweet, "homonym")
-    # goji_tweet = goji_tweet_generator(original_tweet, "hiragana")
     print(goji_tweet)
+    """
+    for i in range(30):
+        goji_tweet = goji_tweet_generator(original_tweet, "homonym")
+        print(goji_tweet)
+    """

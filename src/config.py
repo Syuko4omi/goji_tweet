@@ -60,12 +60,26 @@ def is_kanji_idiom(idiom: str) -> bool:
     pos_tag_list = [
         token.part_of_speech.split(",")[0] for token in tokenizer.tokenize(idiom)
     ]
+    surface = [token.surface for token in tokenizer.tokenize(idiom)]
+
+    flag = True
+    for idx, word in enumerate(surface):
+        if pos_tag_list[idx] != "名詞" or re.match(KANJI_IDIOM_REGEX, word) is None:
+            flag = False
+            break
+        else:
+            if re.match(KANJI_IDIOM_REGEX, word).group() != word:
+                flag = False
+                break
+    return flag
+    """
     flag = False
     if pos_tag_list == ["名詞"]:
         if re.match(KANJI_IDIOM_REGEX, idiom) is not None:
             if re.match(KANJI_IDIOM_REGEX, idiom).group() == idiom:
                 flag = True
     return flag
+    """
 
 
 def suggest_homonym_list(

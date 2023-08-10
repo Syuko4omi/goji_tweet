@@ -13,14 +13,15 @@ def generate_goji_tweet_hom(surface, reading, noun_pos_shuffled):
             original_kanji_form=surface[noun_pos],
             exclude_original_form=True,
         )
+        goji_candidate = [
+            candidate
+            for candidate in goji_candidate
+            if is_kanji_idiom(candidate) is True
+        ]
         if len(goji_candidate) != 0:
-            goji_candidate = [
-                candidate
-                for candidate in goji_candidate
-                if is_kanji_idiom(candidate) is True
-            ]
             replaced_pos_id = noun_pos
-            mistaken_idiom = random.choice(goji_candidate)
+            # mistaken_idiom = random.choice(goji_candidate)
+            mistaken_idiom = goji_candidate[0]
             break
     after_tweet = ""
     for idx, item in enumerate(surface):
