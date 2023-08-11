@@ -50,6 +50,7 @@ def generate_goji_tweet_one_hira(
                 replaced_pos_id = noun_pos
                 mistaken_idiom = goji_candidate[0]
                 # mistaken_idiom = random.choice(goji_candidate)
+                # usually goji_candidate[0] provides frequently used idiom, so we need not to randomly choice other idioms
                 break
         if replaced_pos_id != -1:
             break
