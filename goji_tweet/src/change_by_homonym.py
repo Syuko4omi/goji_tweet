@@ -11,6 +11,7 @@ def generate_goji_tweet_hom(
     mistaken_idiom = ""
 
     for noun_pos in noun_pos_shuffled:
+        # reading[noun_pos] is katakana and to send request we should convert it to hiragana
         goji_candidate = suggest_homonym_list(
             hiragana_form=jaconv.kata2hira(reading[noun_pos]),
             original_kanji_form=surface[noun_pos],
