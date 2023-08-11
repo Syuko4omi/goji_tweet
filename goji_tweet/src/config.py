@@ -65,10 +65,12 @@ def is_kanji_idiom(idiom: str) -> bool:
 
     flag = True
     for idx, word in enumerate(surface):
+        # if the word is not noun or the word does not contain any kanji
         if pos_tag_list[idx] != "名詞" or re.match(KANJI_IDIOM_REGEX, word) is None:
             flag = False
             break
         else:
+            # if some chars in the word are not kanji
             if re.match(KANJI_IDIOM_REGEX, word).group() != word:
                 flag = False
                 break
@@ -111,13 +113,19 @@ def suggest_homonym_list(
         ret_string: str = res.readline().decode(
             "utf-8"
         )  # return should be one-line string
-        homonym_list = ast.literal_eval(ret_string)  # convert str to list
-        if len(homonym_list) == 1 and exclude_original_form is True:
-            homonym_list_excluded_original_form = [
-                item for item in homonym_list[0][1] if item != original_kanji_form
+        furigana_and_kanji_forms = ast.literal_eval(ret_string)  # convert str to list
+        if len(furigana_and_kanji_forms) == 1 and exclude_original_form is True:
+            homonym_list = [
+                item
+                for item in furigana_and_kanji_forms[0][1]
+                if item != original_kanji_form and is_kanji_idiom(item) is True
             ]
-        elif len(homonym_list) == 1 and exclude_original_form is False:
-            homonym_list_excluded_original_form = [item for item in homonym_list[0][1]]
+        elif len(furigana_and_kanji_forms) == 1 and exclude_original_form is False:
+            homonym_list = [
+                item
+                for item in furigana_and_kanji_forms[0][1]
+                if is_kanji_idiom(item) is True
+            ]
         else:  # those don't have any homonym or separated idioms are excluded
-            homonym_list_excluded_original_form = []
-        return homonym_list_excluded_original_form
+            homonym_list = []
+        return homonym_list
