@@ -1,10 +1,8 @@
-import jaconv
 import random
-from goji_tweet.src.config import (
-    HIRAGANA_RULES_DICT,
-    is_kanji_idiom,
-    suggest_homonym_list,
-)
+
+import jaconv
+from goji_tweet.src.config import (HIRAGANA_RULES_DICT, is_kanji_idiom,
+                                   suggest_homonym_list)
 
 
 def generate_furigana_candidate(

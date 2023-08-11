@@ -1,8 +1,9 @@
-import re
-from janome.tokenizer import Tokenizer
-import urllib.request
-import urllib.parse
 import ast
+import re
+import urllib.parse
+import urllib.request
+
+from janome.tokenizer import Tokenizer
 
 KANJI_IDIOM_REGEX = "[一-龥]+"
 HIRAGANA_RULES_DICT = {

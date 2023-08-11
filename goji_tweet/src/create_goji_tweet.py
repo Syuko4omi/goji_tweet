@@ -1,8 +1,9 @@
-from janome.tokenizer import Tokenizer
 import random
+
 from goji_tweet.src.change_by_homonym import generate_goji_tweet_hom
 from goji_tweet.src.change_by_one_hiragana import generate_goji_tweet_one_hira
 from goji_tweet.src.config import is_kanji_idiom
+from janome.tokenizer import Tokenizer
 
 
 def tweet_preprocesser(original_tweet: str):

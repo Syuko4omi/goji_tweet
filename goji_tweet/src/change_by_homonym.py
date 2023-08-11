@@ -1,5 +1,6 @@
-import jaconv
 import random
+
+import jaconv
 from goji_tweet.src.config import is_kanji_idiom, suggest_homonym_list
 
 
